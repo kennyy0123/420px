@@ -1,6 +1,7 @@
 <?php
     require_once('user/user.class.php');
-
+    session_start();
+    
     $res = null;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,21 +25,25 @@
       <a class="nav-item">
         <h1> 420 PX </h1>
       </a>
-      <a class="nav-item is-tab is-hidden-mobile" href="index.php">Connexion</a>
-      <a class="nav-item is-tab is-hidden-mobile is-active" href="register.php">Inscription</a>
+      <?php if (empty($_SESSION['pseudo']))  : ?>
+          <a class="nav-item is-tab is-hidden-mobile" href="connexion.php">Connexion</a>
+          <a class="nav-item is-tab is-hidden-mobile is-active" href="register.php">Inscription</a>
+      <?php endif; ?>
       <a class="nav-item is-tab is-hidden-mobile" href="gallerie.php">Gallerie</a>
     </div>
-    <div class="nav-right nav-menu">
-      <a class="nav-item is-tab">Log out</a>
+   <?php if (isset($_SESSION['pseudo'])) : ?>
+        <div class="nav-right nav-menu">
+        <a class="nav-item is-tab" href="logout.php">Log out</a>
     </div>
+    <?php endif; ?>
   </div>
 </nav>
- <?php if (isset($res) && $res === true)  : ?>
+ <?php if (!isset($res) && $res === false)  : ?>
       <div class="notification is-danger">
         Une erreur est survenue durant la création du compte.
     </div>
 <?php endif; ?>
-<?php if (isset($res) && $res === false ) : ?>
+<?php if (isset($res) && $res === true ) : ?>
     <div class="notification is-success">
         Votre compte à été crée.
     </div>

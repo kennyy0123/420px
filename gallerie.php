@@ -1,7 +1,6 @@
 <?php
-
+  session_start();
 ?>
-
 
 <html lang="fr">
 <head>
@@ -18,13 +17,17 @@
       <a class="nav-item">
         <h1> 420 PX </h1>
       </a>
-      <a class="nav-item is-tab is-hidden-mobile" href="index.php">Connexion</a>
-      <a class="nav-item is-tab is-hidden-mobile " href="register.php">Inscription</a>
+       <?php if (empty($_SESSION['pseudo']))  : ?>
+          <a class="nav-item is-tab is-hidden-mobile" href="connexion.php">Connexion</a>
+          <a class="nav-item is-tab is-hidden-mobile" href="register.php">Inscription</a>
+      <?php endif; ?>
       <a class="nav-item is-tab is-hidden-mobile is-active" href="gallerie.php">Gallerie</a>
     </div>
-    <div class="nav-right nav-menu">
-      <a class="nav-item is-tab">Log out</a>
+    <?php if (isset($_SESSION['pseudo'])) : ?>
+        <div class="nav-right nav-menu">
+        <a class="nav-item is-tab" href="logout.php">Log out</a>
     </div>
+    <?php endif; ?>
   </div>
 </nav>
 </body>
