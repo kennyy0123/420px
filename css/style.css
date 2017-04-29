@@ -25,3 +25,20 @@ h1 {
 #button_login{
     float: right;
 }
+
+#upload_picture {
+    text-align: center;
+    margin-top: 2%;
+    widows: 100%;
+}
+
+button.button, input[type="submit"].button{
+    height: 36px;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
