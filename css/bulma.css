@@ -3471,6 +3471,7 @@ input[type="submit"].button {
   color: #4a4a4a;
   max-width: 100%;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .card .media:not(:last-child) {

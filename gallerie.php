@@ -1,7 +1,11 @@
 <?php
   session_start();
+  require('user/picture.class.php');
+  
+  $result = new Picture();
+  $res_picture = array();
 
-  if( isset($_POST['upload'])) 
+  if(isset($_POST['upload'])) 
   {
     $content_dir = 'picture/'; 
     $tmp_file = $_FILES['fichier']['tmp_name'];
@@ -11,12 +15,26 @@
 
     $type_file = $_FILES['fichier']['type'];
     $name_file = $_FILES['fichier']['name'];
+    
+    $resul_guid = $result->GUID();
 
-    if(!move_uploaded_file($tmp_file, $content_dir . $name_file) )
-        exit("Le fichier est impossible à créer : $content_dir");
+    if(move_uploaded_file($tmp_file, $content_dir . $resul_guid .$name_file) ) {
+          $result_bool = $result->add_picture($content_dir . $resul_guid . $name_file, $_SESSION['pseudo']);     
+    }
+  }
+  
+  if (isset($_POST["delete"])) {
+    $result->delete_picture($_POST['url']);
+    unlink($_POST['url']);
   }
 
-  
+   if (isset($_SESSION['pseudo'])) {
+      $res_picture = $result->get_picture($_SESSION['pseudo']);
+   }
+   else {
+      $res_picture = $result->get_allpicture();
+   }
+
 ?>
 
 <html lang="fr">
@@ -55,8 +73,67 @@
     <input class="button is-small" type="submit" name="upload" value="Uploader">
   </div>
   </form>
-<?php endif; ?>
+<?php else : ?>
+<form methode="post">
+<div class="field has-addons" style="justify-content: center; margin-top:10px;">
+  <p class="control">
+    <input class="input" type="text" placeholder="Pseudo">
+  </p>
+  <p class="control">
+    <button class="button is-info">Search</button>
+  </p>
 </div>
+</form>
 
+<?php endif; ?>
+
+<div class="columns is desktop">
+<div class="column">
+<div class="columns is-multiline is-mobile" style="padding-top: 50px;">
+  <?php if (isset($_SESSION['pseudo'])) : ?>
+  <?
+    for ($x = 0; $x <= count($res_picture) - 1; $x++) {
+      echo "<div class='column is-one-quarter'><form method="."POST".">
+            <div class='card'>
+          <header class='card-header'>
+          </header>
+          <div class='card-content'>
+            <img src='$res_picture[$x]'>
+          </div>
+          <footer class='card-footer'>
+             <button href='$res_picture[$x]' class='card-footer-item' style='background: white; border:none;' name='delete' type='submit'>
+             <input name='url' value='$res_picture[$x]' type='hidden'></input>
+              supprimer
+          </button>
+          </footer>
+        </div></form></div>";
+    }
+  ?>
+  <?php endif; ?>
+
+  <?php if (empty($_SESSION['pseudo'])) : ?>
+  <? 
+    for ($x = 0; $x <= count($res_picture) - 1; $x++) {
+       $name_res = $res_picture[$x][0];
+       $name_path = $res_picture[$x][1];
+
+      echo "<div class='column is-one-quarter'><div class='card'>
+          <header class='card-header'>
+          </header>
+          <div class='card-content'>
+            <img src='$name_res'>
+          </div>
+          <footer class='card-footer'>
+            <a class='card-footer-item'>$name_path</a>
+          </footer>
+        </div></div>";
+    } 
+  ?>
+  <?php endif; ?>
+
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>

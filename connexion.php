@@ -10,7 +10,7 @@
 
      if (isset($res) && $res === true) {
         $_SESSION['pseudo'] = $_POST['pseudo'];
-        header('Location: index.php');
+        header('Location: gallerie.php');
      }
 ?>
 

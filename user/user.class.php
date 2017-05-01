@@ -7,6 +7,7 @@
         private $email;
         private $mdp;
         private $mdp_second;
+        private $error;
 
         static public function create_user($email, $mdp, $mdp_second) {
             $dbh = new Database_connexion();
@@ -44,12 +45,12 @@
             if (!isset($mdp) || !isset($email))
                 return false;
             
-            try {
-                
-                $prepa = $result->prepare("SELECT * FROM user WHERE ? = user.mdp AND LOWER(?) = user.pseudo");
-                $result = $prepa->execute(array(crypt($mdp, $email), $email));    
-                
-                if ($result == false) {
+            try {                
+                $prepa = $result->prepare("SELECT * FROM user WHERE mdp = :search_mdp AND pseudo = :search_pseudo LIMIT 1");
+                $result_synt = $prepa->execute(array('search_mdp'=> crypt($mdp, $email), 'search_pseudo' => $email));
+                $result = $prepa->fetch(PDO::FETCH_OBJ);
+
+                if (!$result) {
                      return false;
                 }
                 
