@@ -69,29 +69,6 @@
             }
         }
 
-        static public function get_allpicture() {
-            $dbh = new Database_connexion();
-            $result = $dbh->connexion_string();
-            
-            try {
-                $prepa = $result->prepare("SELECT * FROM picture ");
-                
-                $res_array = array();
-                
-                if(!$prepa->execute(array()))
-                    echo 'ERROR';
-
-                while($student = $prepa->fetch(PDO::FETCH_OBJ) ) {
-                    array_push($res_array, array($student->path, $student->pseudo));
-                }
-
-                return $res_array;
-            }
-            catch (PDOException $e) {
-                $this->error = $e->getMessage();
-            }
-        }
-
         static public function delete_picture($path) {
             $dbh = new Database_connexion();
             $result = $dbh->connexion_string();

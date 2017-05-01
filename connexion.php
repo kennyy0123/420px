@@ -2,7 +2,7 @@
     require_once('user/user.class.php');
     session_start();
     $res = null;
-
+    
      if (!empty($_POST)) {
          $result = new User();
          $res = $result->connect_user($_POST['pseudo'], $_POST['password']);
@@ -50,6 +50,7 @@
         Votre compte est invalide.
       </div>
 <?php endif; ?>
+
 <form method="POST">
   <div class="columns is-desktop" id="box_signIn">
   <div class="column is-6">

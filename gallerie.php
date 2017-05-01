@@ -18,9 +18,11 @@
     
     $resul_guid = $result->GUID();
 
-    if(move_uploaded_file($tmp_file, $content_dir . $resul_guid .$name_file) ) {
-          $result_bool = $result->add_picture($content_dir . $resul_guid . $name_file, $_SESSION['pseudo']);     
-    }
+    $image = new Imagick($tmp_file);
+    $image->adaptiveResizeImage(420,420);
+    $image->writeImage($content_dir . $resul_guid . '.jpg');
+    $result_bool = $result->add_picture($content_dir . $resul_guid . '.jpg', $_SESSION['pseudo']);
+
   }
   
   if (isset($_POST["delete"])) {
@@ -31,10 +33,10 @@
    if (isset($_SESSION['pseudo'])) {
       $res_picture = $result->get_picture($_SESSION['pseudo']);
    }
-   else {
-      $res_picture = $result->get_allpicture();
-   }
 
+   if (isset($_POST['search_name'])){
+      $res_picture = $result->get_picture($_POST['search_name']);
+   }
 ?>
 
 <html lang="fr">
@@ -74,13 +76,13 @@
   </div>
   </form>
 <?php else : ?>
-<form methode="post">
+<form method="post">
 <div class="field has-addons" style="justify-content: center; margin-top:10px;">
   <p class="control">
-    <input class="input" type="text" placeholder="Pseudo">
+    <input class="input" type="text" placeholder="Pseudo"  name="search_name">
   </p>
   <p class="control">
-    <button class="button is-info">Search</button>
+    <button class="button is-info" type="submit">Search</button>
   </p>
 </div>
 </form>
@@ -114,18 +116,13 @@
   <?php if (empty($_SESSION['pseudo'])) : ?>
   <? 
     for ($x = 0; $x <= count($res_picture) - 1; $x++) {
-       $name_res = $res_picture[$x][0];
-       $name_path = $res_picture[$x][1];
-
+       $name_res = $res_picture[$x];
       echo "<div class='column is-one-quarter'><div class='card'>
           <header class='card-header'>
           </header>
           <div class='card-content'>
             <img src='$name_res'>
           </div>
-          <footer class='card-footer'>
-            <a class='card-footer-item'>$name_path</a>
-          </footer>
         </div></div>";
     } 
   ?>
