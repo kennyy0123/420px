@@ -38,12 +38,12 @@
     <?php endif; ?>
   </div>
 </nav>
- <?php if (!isset($res) && $res === false)  : ?>
+ <?php if (isset($res) && $res === false)  : ?>
       <div class="notification is-danger">
         Une erreur est survenue durant la création du compte.
     </div>
-<?php endif; ?>
-<?php if (isset($res) && $res === true ) : ?>
+    <?php endif; ?>
+<?php if (isset($res) && $res === true)  : ?>
     <div class="notification is-success">
         Votre compte à été crée.
     </div>
