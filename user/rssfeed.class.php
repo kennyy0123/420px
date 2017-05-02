@@ -22,13 +22,14 @@ require('connexion.class.php');
                     echo 'ERROR';
                 
                 $xml .= '<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0">';
-                $xml .= '<picture><title>420 PX picture</title><link>https://www.420px.com</link><description>Free picture Gallery</description><pseudo>'.  $user .'</pseudo>';
+                $xml .= '<channel><title>'.  $user .'</title><link>https://www.420px.com</link><description>Free picture Gallery</description>';
                 
+
                 while($student = $prepa->fetch(PDO::FETCH_OBJ) ) {
-                   $xml .= '<item><link>' . 'http://' . $_SERVER['HTTP_HOST'] . '/php_projet/' . $student->path . '</link></item>';
+                   $xml .= '<item><title>420Px picture</title><link>' . 'http://' . $_SERVER['HTTP_HOST'] . '/php_projet/' . $student->path . '</link></item>';
                 }
                 
-                $xml .= '</picture></rss>';
+                $xml .= '</channel></rss>';
 
                 
                 if ($result == false) {
