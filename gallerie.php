@@ -59,6 +59,7 @@
           <a class="nav-item is-tab is-hidden-mobile" href="register.php">Inscription</a>
       <?php endif; ?>
       <a class="nav-item is-tab is-hidden-mobile is-active" href="gallerie.php">Gallerie</a>
+      <a class="nav-item is-tab is-hidden-mobile" href="xml.php">XML</a>
     </div>
     <?php if (isset($_SESSION['pseudo'])) : ?>
         <div class="nav-right nav-menu">

@@ -42,3 +42,12 @@ button.button, input[type="submit"].button{
     padding: 6px 12px;
     cursor: pointer;
 }
+
+#title_page {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#xml_box{
+    justify-content: center;
+}

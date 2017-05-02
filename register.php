@@ -30,6 +30,7 @@
           <a class="nav-item is-tab is-hidden-mobile is-active" href="register.php">Inscription</a>
       <?php endif; ?>
       <a class="nav-item is-tab is-hidden-mobile" href="gallerie.php">Gallerie</a>
+      <a class="nav-item is-tab is-hidden-mobile" href="xml.php">XML</a>
     </div>
    <?php if (isset($_SESSION['pseudo'])) : ?>
         <div class="nav-right nav-menu">
@@ -42,7 +43,7 @@
       <div class="notification is-danger">
         Une erreur est survenue durant la création du compte.
     </div>
-    <?php endif; ?>
+ <?php endif; ?>
 <?php if (isset($res) && $res === true)  : ?>
     <div class="notification is-success">
         Votre compte à été crée.
