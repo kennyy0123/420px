@@ -1,5 +1,6 @@
 <?php
-    require_once('user/user.class.php');
+    require_once('class/user.class.php');
+    
     session_start();
      $res = null;
 

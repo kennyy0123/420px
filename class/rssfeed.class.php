@@ -3,11 +3,10 @@
 require('connexion.class.php');
     class RSS 
     {
-     
-        
         static public function create_rssfeed($user) {
 
             $xml = "";
+            $user = htmlspecialchars($user);
             $dbh = new Database_connexion();
             $result = $dbh->connexion_string();
 
@@ -24,14 +23,12 @@ require('connexion.class.php');
                 $xml .= '<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0">';
                 $xml .= '<channel><title>'.  $user .'</title><link>https://www.420px.com</link><description>Free picture Gallery</description>';
                 
-
                 while($student = $prepa->fetch(PDO::FETCH_OBJ) ) {
                    $xml .= '<item><title>420Px picture</title><link>' . 'http://' . $_SERVER['HTTP_HOST'] . '/php_projet/' . $student->path . '</link></item>';
                 }
                 
                 $xml .= '</channel></rss>';
 
-                
                 if ($result == false) {
                      return false;
                 }
@@ -45,5 +42,4 @@ require('connexion.class.php');
                 }
         }
     }
-
 ?>

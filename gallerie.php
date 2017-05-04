@@ -1,6 +1,7 @@
 <?php
   session_start();
-  require('user/picture.class.php');
+  
+  require('class/picture.class.php');
   
   $result = new Picture();
   $res_picture = array();
@@ -68,7 +69,7 @@
     <?php endif; ?>
   </div>
 </nav>
-<?php if (isset($_SESSION['pseudo'])) : ?>
+<?php if (isset($_SESSION['pseudo']) && (time() - $_SESSION['pseudo'] > 1800)) : ?>
 
   <form method="post" enctype="multipart/form-data">
   <div id="upload_picture">

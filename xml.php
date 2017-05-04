@@ -1,8 +1,8 @@
 <?php
-    require_once('user/user.class.php');
+    require_once('class/user.class.php');
     session_start();
 
-    if (isset($_POST['user'])){
+    if (isset($_POST['user'])) {
         header('Location: xml_file.php' . '/?usr='  . $_POST['user' ] );
     }
 ?>

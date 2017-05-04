@@ -1,5 +1,6 @@
 <?php
-    require_once('user/user.class.php');
+    require_once('class/user.class.php');
+    
     session_start();
     $res = null;
     
@@ -29,7 +30,6 @@
       <a class="nav-item">
         <h1> 420 PX </h1>
       </a>
-      
       <?php if (empty($_SESSION['pseudo'])) : ?>
        <a class="nav-item is-tab is-hidden-mobile is-active" href="connexion.php">Connexion</a>
        <a class="nav-item is-tab is-hidden-mobile" href="register.php">Inscription</a>
@@ -52,6 +52,9 @@
       </div>
 <?php endif; ?>
 
+
+<img src="img/photograph.png" height="150" width="150"  style="display:block; margin: 0 auto; margin-top: 60px; margin-bottom: 20px;" />
+<div>
 <form method="POST">
   <div class="columns is-desktop" id="box_signIn">
   <div class="column is-6">
@@ -78,6 +81,7 @@
 </div>
   </div>
   </form>
+  </div>
 </div>
 </body>
 </html>

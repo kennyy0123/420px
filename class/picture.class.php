@@ -42,16 +42,17 @@
             $dbh = new Database_connexion();
             $result = $dbh->connexion_string();
 
+            $user = htmlspecialchars($user);
+
             if (empty($user) || !isset($user))
                 return false;
             
             try {
                 $prepa = $result->prepare("SELECT * FROM picture WHERE pseudo like :search");
                 $res_array = array();
-                
                 if(!$prepa->execute(array('search'=> $user)))
-                    echo 'ERROR';
-
+                    return false;
+                
                 while($student = $prepa->fetch(PDO::FETCH_OBJ) ) {
                     array_push($res_array, $student->path);
                 }
