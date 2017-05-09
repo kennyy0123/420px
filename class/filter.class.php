@@ -3,7 +3,7 @@
         
         public function filter_function ($path, $filter) 
         {       
-            try{
+            try {
                 $image = new Imagick($path);
                 switch($filter) 
                 {
@@ -45,5 +45,24 @@
                 return false;
             }
         }
+
+    public function get_histogram($path){
+        $image = new Imagick($path);
+        $histogramElement = $image->getImageHistogram();
+        $res = [];
+
+        foreach($histogramElement as $histogram_elements) {
+            $color = $histogram_elements->getColor();
+            $r = $color['r'];
+            $g = $color['g'];
+            $b = $color['b'];
+
+            $res[$r . ',' . $g . ',' . $b] = $histogram_elements->getColorCount();
+        }
+        arsort($res);
+        $output_slice = array_slice($res, 0, 4);
+        
+        return $output_slice;
     }
+}
 ?>

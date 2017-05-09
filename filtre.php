@@ -4,9 +4,11 @@
     
     $path = "";
     $filtre = new filter();
+    $histogram = "";
 
     if (isset($_GET["picture"])) {
         $path = $_GET["picture"];
+        $histogram = array_keys($filtre->get_histogram($path));
     }
 
     if (isset($_POST["contraste-plus"])) {
@@ -17,7 +19,6 @@
     }
      else if (isset($_POST["gauss"])) {
       $filtre->filter_function($path, "gauss");
-      echo "gauss";
     }
     else if (isset($_POST["sepia"])) {
       $filtre->filter_function($path, "sepia");
@@ -33,9 +34,7 @@
     }
     else if (isset($_POST["luminosite-minus"])) {
       $filtre->filter_function($path, "luminosite-minus");
-    }
-
-    
+    }    
 ?>
 
 <html lang="fr">
@@ -82,6 +81,14 @@
     <button class="button is-outlined" name="contour" type="submit">Contour</button>
 </div>
 </form>
+
+<div style="text-align:center;">
+
+<?php foreach($histogram as $k): ?>
+    <div class="carre" style="width:30px;height:20px; background-color: rgb(<?php echo $k ?>); margin-bottom: 5px; display: inline-block;"></div>
+<?php endforeach; ?>
+</div>
+
 
 <div class="box" style="width: 35%; margin: 0 auto;">
     <img href=></img>
