@@ -28,6 +28,14 @@
     else if (isset($_POST["contour"])) {
       $filtre->filter_function($path, "contour");
     }
+     else if (isset($_POST["luminosite-plus"])) {
+      $filtre->filter_function($path, "luminosite-plus");
+    }
+    else if (isset($_POST["luminosite-minus"])) {
+      $filtre->filter_function($path, "luminosite-minus");
+    }
+
+    
 ?>
 
 <html lang="fr">
@@ -66,8 +74,8 @@
 <div style="width: 100%; text-align:center;">
     <button class="button is-outlined" name="contraste-plus"  type="submit">Contraste +</button>
     <button class="button is-outlined" name="contraste-minus"  type="submit">Contraste -</button>
-    <!--<button class="button is-outlined" name="luminosite+" type="submit">Luminosité +</button>
-    <button class="button is-outlined" name="luminosite-" type="submit">Luminosité -</button>-->
+    <button class="button is-outlined" name="luminosite-plus" type="submit">Luminosité +</button>
+    <button class="button is-outlined" name="luminosite-minus" type="submit">Luminosité -</button>
     <button class="button is-outlined" name="gauss" type="submit">Gauss</button>
     <button class="button is-outlined" name="sepia" type="submit">Sépia</button>
     <button class="button is-outlined" name="gray" type="submit">Gris</button>

@@ -2,9 +2,9 @@
     class filter {
         
         public function filter_function ($path, $filter) 
-        {
+        {       
+            try{
                 $image = new Imagick($path);
-
                 switch($filter) 
                 {
                     case "contraste-plus" :
@@ -31,7 +31,19 @@
                         $image->edgeImage(0);
                         $image->writeImage($path);
                         break;
+                    case "luminosite-plus" :
+                        $image->modulateImage(200, 100, 100);
+                        $image->writeImage($path);
+                        break;
+                    case "luminosite-minus" :
+                        $image->modulateImage(50, 100, 100);
+                        $image->writeImage($path);
+                        break;
                 }
+            }
+            catch (ImagickException $e){
+                return false;
+            }
         }
     }
 ?>
