@@ -23,7 +23,6 @@
     $image->adaptiveResizeImage(420,420);
     $image->writeImage($content_dir . $resul_guid . '.jpg');
     $result_bool = $result->add_picture($content_dir . $resul_guid . '.jpg', $_SESSION['pseudo']);
-
   }
   
   if (isset($_POST["delete"])) {
@@ -60,7 +59,7 @@
           <a class="nav-item is-tab is-hidden-mobile" href="register.php">Inscription</a>
       <?php endif; ?>
       <a class="nav-item is-tab is-hidden-mobile is-active" href="gallerie.php">Gallerie</a>
-      <a class="nav-item is-tab is-hidden-mobile" href="xml.php">XML</a>
+      <a class="nav-item is-tab is-hidden-mobile" href="xml.php">RSS</a>
     </div>
     <?php if (isset($_SESSION['pseudo'])) : ?>
         <div class="nav-right nav-menu">
@@ -97,17 +96,19 @@
   <?php if (isset($_SESSION['pseudo'])) : ?>
   <?
     for ($x = 0; $x <= count($res_picture) - 1; $x++) {
+      $result_cut = explode("picture/", $res_picture[$x]);
+      
       echo "<div class='column is-one-quarter'><form method="."POST".">
             <div class='card'>
           <header class='card-header'>
           </header>
           <div class='card-content'>
-            <img src='$res_picture[$x]'>
+            <a href='filtre.php?picture=$res_picture[$x]'><img src='$res_picture[$x]'></a>
           </div>
           <footer class='card-footer'>
              <button href='$res_picture[$x]' class='card-footer-item' style='background: white; border:none;' name='delete' type='submit'>
              <input name='url' value='$res_picture[$x]' type='hidden'></input>
-              supprimer
+              Supprimer
           </button>
           </footer>
         </div></form></div>";

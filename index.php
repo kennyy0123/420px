@@ -34,7 +34,7 @@
         <a class="nav-item is-tab is-hidden-mobile" href="register.php">Inscription</a>
       <?php endif; ?>
       <a class="nav-item is-tab is-hidden-mobile" href="gallerie.php">Gallerie</a>
-      <a class="nav-item is-tab is-hidden-mobile" href="xml.php">XML</a>
+      <a class="nav-item is-tab is-hidden-mobile" href="xml.php">RSS</a>
     </div>
 
     <?php if (isset($_SESSION['pseudo'])) : ?>

@@ -35,7 +35,7 @@
        <a class="nav-item is-tab is-hidden-mobile" href="register.php">Inscription</a>
       <?php endif; ?>
       <a class="nav-item is-tab is-hidden-mobile" href="gallerie.php">Gallerie</a>
-      <a class="nav-item is-tab is-hidden-mobile" href="xml.php">XML</a>
+      <a class="nav-item is-tab is-hidden-mobile" href="xml.php">RSS</a>
     </div>
 
     <?php if (isset($_SESSION['pseudo'])) : ?>
@@ -51,7 +51,6 @@
         Votre compte est invalide.
       </div>
 <?php endif; ?>
-
 
 <img src="img/photograph.png" height="150" width="150"  style="display:block; margin: 0 auto; margin-top: 60px; margin-bottom: 20px;" />
 <div>

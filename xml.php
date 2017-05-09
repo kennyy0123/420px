@@ -27,7 +27,7 @@
           <a class="nav-item is-tab is-hidden-mobile" href="register.php">Inscription</a>
       <?php endif; ?>
       <a class="nav-item is-tab is-hidden-mobile" href="gallerie.php">Gallerie</a>
-      <a class="nav-item is-tab is-hidden-mobile is-active" href="xml.php">XML</a>
+      <a class="nav-item is-tab is-hidden-mobile is-active" href="xml.php">RSS</a>
     </div>
    <?php if (isset($_SESSION['pseudo'])) : ?>
         <div class="nav-right nav-menu">
@@ -37,7 +37,7 @@
   </div>
 </nav>
 
-<h1 class="title" id="title_page">Flux XML</h1>
+<h1 class="title" id="title_page">Flux RSS</h1>
 
 <form method="post">
 <div class="field has-addons" id="xml_box">
