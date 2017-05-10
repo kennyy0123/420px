@@ -34,7 +34,7 @@
       $res_picture = $result->get_picture($_SESSION['pseudo']);
    }
 
-   if (isset($_POST['search_name'])){
+   if (isset($_POST['search_name']) &&  !empty($_SESSION['pseudo'])) {
       $res_picture = $result->get_picture($_POST['search_name']);
    }
 ?>

@@ -2,7 +2,7 @@
     require_once('class/user.class.php');
     session_start();
 
-    if (isset($_POST['user'])) {
+    if (isset($_POST['user']) && !empty($_POST['user'])) {
         header('Location: xml_file.php' . '/?usr='  . $_POST['user' ] );
     }
 ?>
