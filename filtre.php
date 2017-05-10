@@ -1,6 +1,9 @@
 <?php
     session_start();
     require('class/filter.class.php');
+
+    if (!isset($_SESSION['pseudo']))
+      header('Location: gallerie.php');
     
     $path = "";
     $filtre = new filter();

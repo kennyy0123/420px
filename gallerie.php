@@ -5,6 +5,7 @@
   
   $result = new Picture();
   $res_picture = array();
+  $invalid_picture = true;
 
   if(isset($_POST['upload'])) 
   {
@@ -16,13 +17,19 @@
 
     $type_file = $_FILES['fichier']['type'];
     $name_file = $_FILES['fichier']['name'];
-    
-    $resul_guid = $result->GUID();
 
+    if (exif_imagetype($tmp_file) == 2 || exif_imagetype($tmp_file) == 1 || exif_imagetype($tmp_file) == 3) 
+    {
+    $invalid_picture = true;
+    $resul_guid = $result->GUID();
     $image = new Imagick($tmp_file);
     $image->adaptiveResizeImage(420,420);
     $image->writeImage($content_dir . $resul_guid . '.jpg');
     $result_bool = $result->add_picture($content_dir . $resul_guid . '.jpg', $_SESSION['pseudo']);
+    }
+    else
+      $invalid_picture = false;
+
   }
   
   if (isset($_POST["delete"])) {
@@ -34,7 +41,7 @@
       $res_picture = $result->get_picture($_SESSION['pseudo']);
    }
 
-   if (isset($_POST['search_name']) &&  !empty($_SESSION['pseudo'])) {
+   if (isset($_POST['search_name']) && !empty($_POST['search_name'])) {
       $res_picture = $result->get_picture($_POST['search_name']);
    }
 ?>
@@ -68,6 +75,12 @@
     <?php endif; ?>
   </div>
 </nav>
+
+<?php if ($invalid_picture == false) : ?>
+<div class="notification is-danger">
+  Ce format est invalide
+</div>
+<?php endif; ?>
 <?php if (isset($_SESSION['pseudo']) && (time() - $_SESSION['pseudo'] > 1800)) : ?>
 
   <form method="post" enctype="multipart/form-data">
@@ -87,7 +100,6 @@
   </p>
 </div>
 </form>
-
 <?php endif; ?>
 
 <div class="columns is desktop">

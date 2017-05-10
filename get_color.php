@@ -8,7 +8,6 @@
         header('Location: gallerie.php');
     }
 
-    
     $result = new Picture();
     $array_picture = $result->get_allpicture();
     $picture_resolve = $result->get_picturergb($_GET['rgb'], $array_picture);
@@ -59,12 +58,6 @@
           <div class='card-content'>
             <a href='filtre.php?picture=$picture_resolve[$x]'><img src='$picture_resolve[$x]'></a>
           </div>
-          <footer class='card-footer'>
-             <button href='$picture_resolve[$x]' class='card-footer-item' style='background: white; border:none;' name='delete' type='submit'>
-             <input name='url' value='$picture_resolve[$x]' type='hidden'></input>
-              Supprimer
-          </button>
-          </footer>
         </div></form></div>";
     }
   ?>
