@@ -29,7 +29,7 @@
                 $result = $prepa->execute(array($email, crypt($mdp, $email)));  
                     
                 if ($result == false) {
-                     return false;
+                    return false;
                 }
                 return true;
                 }

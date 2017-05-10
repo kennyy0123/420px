@@ -3,7 +3,7 @@
         
         public function filter_function ($path, $filter) 
         {       
-       
+                try {
                 $image = new Imagick($path);
                 
                 switch($filter) 
@@ -41,9 +41,14 @@
                         $image->writeImage($path);
                         break;
                 }
+            }
+            catch (ImagickException $e) {
+                return false;
+             }
     }
 
     public function get_histogram($path){
+        try {
         $image = new Imagick($path);
         $histogramElement = $image->getImageHistogram();
         $res = [];
@@ -57,10 +62,14 @@
             $res[$r . ',' . $g . ',' . $b] = $histogram_elements->getColorCount();
         }
         arsort($res);
-
+        
         $output_slice = array_slice($res, 0, 4);
         
         return $output_slice;
+        }
+        catch (ImagickException $e) {
+                return false;
+        }
     }
 }
 ?>
