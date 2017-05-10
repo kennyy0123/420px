@@ -57,6 +57,7 @@
             $res[$r . ',' . $g . ',' . $b] = $histogram_elements->getColorCount();
         }
         arsort($res);
+
         $output_slice = array_slice($res, 0, 4);
         
         return $output_slice;

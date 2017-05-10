@@ -1,14 +1,15 @@
 <?php
     session_start();
     require('class/filter.class.php');
+    header("Cache-Control: no-cache, must-revalidate"); 
 
     if (!isset($_SESSION['pseudo']))
       header('Location: gallerie.php');
     
     $path = "";
     $filtre = new filter();
-    $histogram = "";
-
+    $histogram = [];
+    
     if (isset($_GET["picture"])) {
         $path = $_GET["picture"];
         $histogram = array_keys($filtre->get_histogram($path));
@@ -38,6 +39,8 @@
     else if (isset($_POST["luminosite-minus"])) {
       $filtre->filter_function($path, "luminosite-minus");
     }
+    
+    $histogram = array_keys($filtre->get_histogram($path));
 ?>
 
 <html lang="fr">
@@ -86,7 +89,6 @@
 </form>
 
 <div style="text-align:center;">
-
 <?php foreach($histogram as $k): ?>
     <a href="get_color.php?rgb=<?php echo $k ?>"><div style="width:30px;height:30px;border-radius: 100%;border-style: solid; border-width: 4px; background-color: rgb(<?php echo $k ?>); margin-bottom: 5px; display: inline-block;"></div></a>
 <?php endforeach; ?>
