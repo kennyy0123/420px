@@ -34,7 +34,7 @@
     }
     else if (isset($_POST["luminosite-minus"])) {
       $filtre->filter_function($path, "luminosite-minus");
-    }    
+    }
 ?>
 
 <html lang="fr">
@@ -71,10 +71,10 @@
 
 <form method="post">
 <div style="width: 100%; text-align:center;">
-    <button class="button is-outlined" name="contraste-plus"  type="submit">Contraste +</button>
-    <button class="button is-outlined" name="contraste-minus"  type="submit">Contraste -</button>
-    <button class="button is-outlined" name="luminosite-plus" type="submit">Luminosité +</button>
-    <button class="button is-outlined" name="luminosite-minus" type="submit">Luminosité -</button>
+    <button class="button is-outlined" name="contraste-plus" type="submit">Contraste +</button>
+    <button class="button is-outlined" name="contraste-minus" type="submit">Contraste -</button>
+    <button class="button is-outlined" name="luminosite-plus"type="submit">Luminosité +</button>
+    <button class="button is-outlined" name="luminosite-minus"type="submit">Luminosité -</button>
     <button class="button is-outlined" name="gauss" type="submit">Gauss</button>
     <button class="button is-outlined" name="sepia" type="submit">Sépia</button>
     <button class="button is-outlined" name="gray" type="submit">Gris</button>
@@ -85,12 +85,12 @@
 <div style="text-align:center;">
 
 <?php foreach($histogram as $k): ?>
-    <div class="carre" style="width:30px;height:20px; background-color: rgb(<?php echo $k ?>); margin-bottom: 5px; display: inline-block;"></div>
+    <a href="get_color.php?rgb=<?php echo $k ?>"><div style="width:30px;height:30px;border-radius: 100%;border-style: solid; border-width: 4px; background-color: rgb(<?php echo $k ?>); margin-bottom: 5px; display: inline-block;"></div></a>
 <?php endforeach; ?>
 </div>
 
 
-<div class="box" style="width: 35%; margin: 0 auto;">
+<div class="box" style="width: 32%; margin: 0 auto;">
     <img href=></img>
     <?php if ($_GET['picture']) : ?>
     <?

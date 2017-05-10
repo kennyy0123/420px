@@ -3,8 +3,9 @@
         
         public function filter_function ($path, $filter) 
         {       
-            try {
+       
                 $image = new Imagick($path);
+                
                 switch($filter) 
                 {
                     case "contraste-plus" :
@@ -40,11 +41,7 @@
                         $image->writeImage($path);
                         break;
                 }
-            }
-            catch (ImagickException $e){
-                return false;
-            }
-        }
+    }
 
     public function get_histogram($path){
         $image = new Imagick($path);

@@ -22,6 +22,7 @@
                 }
 
                 return true;
+                
                 }
                 catch(PDOExcpetion $e){
                     $this->error = $e->getMessage();
@@ -58,12 +59,6 @@
                 }
 
                 return $res_array;
-
-                if ($result == false) {
-                     return false;
-                }
-                
-                return true;
             }
             catch (PDOException $e) {
                 $this->error = $e->getMessage();
@@ -81,6 +76,54 @@
             catch (PDOException $e) {
                 $this->error = $e->getMessage();
             }
+        }
+
+
+         static public function get_allpicture() {
+            $dbh = new Database_connexion();
+            $result = $dbh->connexion_string();
+            
+            try {
+                $prepa = $result->prepare("SELECT * FROM picture");
+                $res_array = array();
+                 if(!$prepa->execute(array()))
+                    return false;
+
+                while($student = $prepa->fetch(PDO::FETCH_OBJ) ) {
+                    array_push($res_array, $student->path);
+                }
+
+                return $res_array;
+            }
+            catch (PDOException $e) {
+                $this->error = $e->getMessage();
+            }
+        }
+
+        static public function get_picturergb($rgb, $array_picture){
+        $result_picture = [];
+        
+        foreach($array_picture as $value){
+            $image = new Imagick($value);
+
+            $histogramElement = $image->getImageHistogram();
+            $res = [];
+            
+            foreach($histogramElement as $histogram_elements) {
+                $color = $histogram_elements->getColor();
+                $r = $color['r'];
+                $g = $color['g'];
+                $b = $color['b'];
+
+                $res[$r . ',' . $g . ',' . $b] = $histogram_elements->getColorCount();
+            }
+
+            if (array_key_exists($rgb, $res)){
+                array_push($result_picture, $value);
+            }
+        }
+        
+        return $result_picture;
         }
     }
 ?>
