@@ -14,7 +14,7 @@ require('connexion.class.php');
                 return false;
             
             try {
-                $prepa = $result->prepare("SELECT * FROM picture WHERE pseudo like :search");
+                $prepa = $result->prepare("SELECT * FROM picture WHERE pseudo = :search");
                 $res_array = array();
                 
                 if(!$prepa->execute(array('search'=> $user)))
@@ -24,13 +24,13 @@ require('connexion.class.php');
                 $xml .= '<channel><title>'.  $user .'</title><link>https://www.420px.com</link><description>Free picture Gallery</description>';
                 
                 while($student = $prepa->fetch(PDO::FETCH_OBJ) ) {
-                   $xml .= '<item><title>420Px picture</title><link>' . 'http://' . $_SERVER['HTTP_HOST'] . '/php_projet/' . $student->path . '</link></item>';
+                    $xml .= '<item><title>420Px picture</title><link>' . 'http://' . $_SERVER['HTTP_HOST'] . '/php_projet/' . $student->path . '</link></item>';
                 }
                 
                 $xml .= '</channel></rss>';
 
                 if ($result == false) {
-                     return false;
+                    return false;
                 }
 
                 echo $xml;

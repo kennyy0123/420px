@@ -56,7 +56,7 @@
   <div class="column is-6">
 <div class="field">
   <p class="control has-icons-left">
-    <input class="input" name="pseudo" placeholder="Pseudonyme" >
+    <input class="input" name="pseudo" placeholder="Pseudonyme" pattern=".{3,}" title="Le pseudo doit contenir au minimum 3 charactères">
     <span class="icon is-small is-left">
       <i class="fa fa-envelope"></i>
     </span>
@@ -64,7 +64,7 @@
 </div>
 <div class="field">
   <p class="control has-icons-left">
-    <input class="input" type="password" name="password" placeholder="Mot de passe" >
+    <input class="input" type="password" name="password" placeholder="Mot de passe" pattern=".{3,}" title="3 charactères minimums">
     <span class="icon is-small is-left">
       <i class="fa fa-lock"></i>
     </span>
@@ -72,7 +72,7 @@
 </div>
 <div class="field">
   <p class="control has-icons-left">
-    <input class="input" type="password" name="password_repeat" placeholder="Retaper le mot de passe">
+    <input class="input" type="password" name="password_repeat" placeholder="Retaper le mot de passe" pattern=".{3,}" title="3 charactères minimums">
     <span class="icon is-small is-left">
       <i class="fa fa-lock"></i>
     </span>

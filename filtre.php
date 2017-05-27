@@ -3,37 +3,39 @@
     require('class/filter.class.php');
     header("Cache-Control: no-cache, must-revalidate"); 
 
-    if (!isset($_SESSION['pseudo']))
-      header('Location: gallerie.php');
-    
     $path = "";
     $filtre = new filter();
     $histogram = [];
+
+    if (!isset($_SESSION['pseudo']))
+      header('Location: gallerie.php');
     
-    if (isset($_GET["picture"])) {
+    if (isset($_GET["picture"]) && !empty($_GET['picture'])) {
         $path = $_GET["picture"];
         $histogram = array_keys($filtre->get_histogram($path));
     }
-
+    else 
+      header('Location: gallerie.php');
+    
     if (isset($_POST["contraste-plus"])) {
       $filtre->filter_function($path, "contraste-plus");
     }
     else if (isset($_POST["contraste-minus"])) {
       $filtre->filter_function($path, "contraste-minus");
     }
-     else if (isset($_POST["gauss"])) {
+    else if (isset($_POST["gauss"])) {
       $filtre->filter_function($path, "gauss");
     }
     else if (isset($_POST["sepia"])) {
       $filtre->filter_function($path, "sepia");
     }
-     else if (isset($_POST["gray"])) {
+    else if (isset($_POST["gray"])) {
       $filtre->filter_function($path, "gray");
     }
     else if (isset($_POST["contour"])) {
       $filtre->filter_function($path, "contour");
     }
-     else if (isset($_POST["luminosite-plus"])) {
+    else if (isset($_POST["luminosite-plus"])) {
       $filtre->filter_function($path, "luminosite-plus");
     }
     else if (isset($_POST["luminosite-minus"])) {
@@ -94,17 +96,11 @@
 <?php endforeach; ?>
 </div>
 
-
 <div class="box" style="width: 32%; margin: 0 auto;">
-    <img href=></img>
-    <?php if ($_GET['picture']) : ?>
-    <?
-          $result = $_GET["picture"];
-          echo "<img src='$result' style='width: 100%;'/>";
-    ?>
+    <?php if (!empty($path)) : ?>
+    <? echo "<img src='$path' style='width: 100%;'/>"; ?>
     <?php endif; ?>
 </div>
-
 </div>
 </body>
 </html>

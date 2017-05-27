@@ -3,7 +3,7 @@
     session_start();
 
     if (isset($_POST['user']) && !empty($_POST['user'])) {
-        header('Location: xml_file.php' . '/?usr='  . $_POST['user' ] );
+        header('Location: xml_file.php' . '/?usr='  . htmlspecialchars($_POST['user' ]) );
     }
 ?>
 

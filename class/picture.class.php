@@ -1,5 +1,5 @@
- <?php
- 
+<?php
+
     require('connexion.class.php');
 
     class Picture 
@@ -18,7 +18,7 @@
                 $result = $prepa->execute(array($user, $path, time()));  
                 
                 if ($result == false) {
-                     return false;
+                    return false;
                 }
 
                 return true;
@@ -27,7 +27,7 @@
                 catch(PDOExcpetion $e){
                     $this->error = $e->getMessage();
                 }
-         }
+        }
 
         function GUID()
         {
@@ -49,9 +49,11 @@
                 return false;
             
             try {
-                $prepa = $result->prepare("SELECT * FROM picture WHERE pseudo like :search");
+                $prepa = $result->prepare("SELECT * FROM picture WHERE pseudo = :search");
                 $res_array = array();
-                if(!$prepa->execute(array('search'=> $user)))
+                $result_query = $prepa->execute([':search' => $user]);
+                
+                if ($result_query == false)
                     return false;
                 
                 while($student = $prepa->fetch(PDO::FETCH_OBJ) ) {
@@ -78,15 +80,15 @@
             }
         }
 
-
-         static public function get_allpicture() {
+        static public function get_allpicture() {
             $dbh = new Database_connexion();
             $result = $dbh->connexion_string();
             
             try {
                 $prepa = $result->prepare("SELECT * FROM picture");
                 $res_array = array();
-                 if(!$prepa->execute(array()))
+                
+                if(!$prepa->execute(array()))
                     return false;
 
                 while($student = $prepa->fetch(PDO::FETCH_OBJ) ) {
@@ -122,7 +124,6 @@
                 array_push($result_picture, $value);
             }
         }
-        
         return $result_picture;
         }
     }

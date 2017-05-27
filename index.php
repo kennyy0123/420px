@@ -2,16 +2,16 @@
     require_once('class/user.class.php');
     
     session_start();
-     $res = null;
+    $res = null;
 
-     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-         $result = new User();
-         $res = $result->connect_user($_POST['pseudo'], $_POST['password']);
-     }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $result = new User();
+        $res = $result->connect_user($_POST['pseudo'], $_POST['password']);
+    }
 
-     if (empty($_SESSION)) {
+    if (empty($_SESSION)) {
         header('Location: connexion.php');
-     }
+    }
 ?>
 
 <html lang="fr">

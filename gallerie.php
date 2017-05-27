@@ -20,16 +20,20 @@
 
     if (exif_imagetype($tmp_file) == 2 || exif_imagetype($tmp_file) == 1 || exif_imagetype($tmp_file) == 3) 
     {
-    $invalid_picture = true;
-    $resul_guid = $result->GUID();
-    $image = new Imagick($tmp_file);
-    $image->adaptiveResizeImage(420,420);
-    $image->writeImage($content_dir . $resul_guid . '.jpg');
-    $result_bool = $result->add_picture($content_dir . $resul_guid . '.jpg', $_SESSION['pseudo']);
+      try {
+        $invalid_picture = true;
+        $resul_guid = $result->GUID();
+        $image = new Imagick($tmp_file);
+        $image->adaptiveResizeImage(420,420);
+        $image->writeImage($content_dir . $resul_guid . '.jpg');
+        $result_bool = $result->add_picture($content_dir . $resul_guid . '.jpg', $_SESSION['pseudo']);
+      }
+      catch (ImagickException $e) {
+            return false;
+      }
     }
     else
       $invalid_picture = false;
-
   }
   
   if (isset($_POST["delete"])) {
@@ -37,13 +41,13 @@
     unlink($_POST['url']);
   }
 
-   if (isset($_SESSION['pseudo'])) {
+  if (isset($_SESSION['pseudo'])) {
       $res_picture = $result->get_picture($_SESSION['pseudo']);
-   }
+  }
 
-   if (isset($_POST['search_name']) && !empty($_POST['search_name'])) {
+  if (isset($_POST['search_name']) && !empty($_POST['search_name'])) {
       $res_picture = $result->get_picture($_POST['search_name']);
-   }
+  }
 ?>
 
 <html lang="fr">
@@ -118,8 +122,8 @@
             <a href='filtre.php?picture=$res_picture[$x]'><img src='$res_picture[$x]'></a>
           </div>
           <footer class='card-footer'>
-             <button href='$res_picture[$x]' class='card-footer-item' style='background: white; border:none;' name='delete' type='submit'>
-             <input name='url' value='$res_picture[$x]' type='hidden'></input>
+            <button href='$res_picture[$x]' class='card-footer-item' style='background: white; border:none;' name='delete' type='submit'>
+            <input name='url' value='$res_picture[$x]' type='hidden'></input>
               Supprimer
           </button>
           </footer>
@@ -128,10 +132,10 @@
   ?>
   <?php endif; ?>
 
-  <?php if (empty($_SESSION['pseudo'])) : ?>
+  <?php if (empty($_SESSION['pseudo']) && !isset($_SESSION['pseudo'])) : ?>
   <? 
     for ($x = 0; $x <= count($res_picture) - 1; $x++) {
-       $name_res = $res_picture[$x];
+      $name_res = $res_picture[$x];
       echo "<div class='column is-one-quarter'><div class='card'>
           <header class='card-header'>
           </header>
